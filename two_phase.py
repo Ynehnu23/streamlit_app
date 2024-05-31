@@ -51,8 +51,7 @@ def InputConstraints():
             constraint = []
             st.write(f"Nhập hệ số của các biến trong ràng buộc thứ {i+1}:")
             for j in range(int(m)):
-                key = f"input_{hashlib.md5(str(j).encode()).hexdigest()}"
-                coefficient = float(st.text_input(f"Nhập hệ số của x{i+1}: ", key=f"input_{j+1}"))
+                coefficient = float(st.text_input(f"Nhập hệ số của x{j+1}: ", key=f"input_{i+1}"))
                 constraint.append(coefficient)
             a.append(constraint)
             operator = st.text_input("Nhập toán tử ràng buộc (>=, <=, =): ")
