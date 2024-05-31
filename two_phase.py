@@ -272,6 +272,14 @@ def convert_to_equations(a, b, c, n, m, conditions):
         print(equation)
     print("---------------------------------------------")
 def convert_to_phase1_form_x0(a, b, c, n, m):
+    if current_c is None:
+        st.error("Hệ số của biến mục tiêu không được để trống.")
+        return None, None
+
+    # Ensure the size of current_c matches the number of variables (m)
+    if len(current_c) != m:
+        st.error("Số lượng hệ số của biến mục tiêu không phù hợp.")
+        return None, None
     # Thêm biến phụ x0 vào hàm mục tiêu với hệ số là 1
     c = [0.0] * m + [1.0] + [0.0] * n
     
