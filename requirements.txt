@@ -67,12 +67,6 @@ six==1.16.0
 soupsieve==2.5
 sympy==1.12
 tenacity==8.2.2
-tensorboard==2.14.1
-tensorboard-data-server==0.7.1
-tensorflow==2.14.0
-tensorflow-estimator==2.14.0
-tensorflow-intel==2.14.0
-tensorflow-io-gcs-filesystem==0.31.0
 termcolor==2.3.0
 threadpoolctl==3.4.0
 torch==2.0.1
