@@ -75,12 +75,12 @@ def InputObjectiveFunctionConditions(m):
     else:
         st.error("Số lượng biến của hàm mục tiêu phải là một số nguyên dương.")
     return conditions
-def PrintObjectiveFunction(c, problem_type):
+def PrintObjectiveFunction(c, problem_type,m):
     global GLOBAL_STATE
     GLOBAL_STATE = {"c": None}
 
     if m is None or c is None:
-        st.error("Hệ số của biến mục tiêu hoặc số lượng biến không được để trống.")
+        st.error("Số lượng biến không được để trống.")
         return
     print("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓")
     print(" Tìm giá trị", end=" ",)
@@ -768,7 +768,7 @@ print()
 # Input problem type (maximize or minimize)
 problem_type = InputProblemType()
 conditions= InputObjectiveFunctionConditions(m)
-PrintObjectiveFunction(c, problem_type)
+PrintObjectiveFunction(c, problem_type,m)
 PrintConstraints(a, operators, b,conditions)
 a, b, c, n, m,conditions  = convert_to_standard_form(a, b, c, n, m, problem_type, operators,conditions)
 current_c = None
