@@ -9,59 +9,60 @@ EPS = 1e-4
 def reset_global_state():
     global GLOBAL_STATE
     GLOBAL_STATE = {}
-GLOBAL_STATE = {}
+
 class Position:
     def __init__(self, row, column):
         self.row = row
         self.column = column
+
 def ReadEquation():
-    n, m = map(int, input().split())
+    n, m = map(int, st.text_input("Nhập số lượng ràng buộc (n) và biến (m), cách nhau bằng dấu cách:").split())
     a = []
     for row in range(n):
-        a.append(list(map(float, input().split())))
-    b = list(map(float, input().split()))
-    c = list(map(float, input().split()))
+        row_input = st.text_input(f"Nhập hệ số của các biến trong ràng buộc thứ {row + 1}, cách nhau bằng dấu cách:")
+        a.append(list(map(float, row_input.split())))
+    b_input = st.text_input("Nhập hệ số sau toán tử ràng buộc, cách nhau bằng dấu cách:")
+    c_input = st.text_input("Nhập hệ số của hàm mục tiêu, cách nhau bằng dấu cách:")
+    b = list(map(float, b_input.split()))
+    c = list(map(float, c_input.split()))
     return a, b, c, n, m
 
 def InputObjectiveFunction():
-    m =st.number_input("Nhập số lượng biến của hàm mục tiêu: ")
-    print("Nhập hệ số của các biến trong hàm mục tiêu:")
+    m = st.number_input("Nhập số lượng biến của hàm mục tiêu: ")
+    st.write("Nhập hệ số của các biến trong hàm mục tiêu:")
     c = []
     for i in range(m):
-        coefficient = float(input(f"Nhập hệ số của x{i+1}: "))
+        coefficient = float(st.text_input(f"Nhập hệ số của x{i+1}: "))
         c.append(coefficient)
     return m, c
 
 def InputConstraints():
-    print("Nhập số lượng ràng buộc:")
     n = st.number_input("Nhập số lượng ràng buộc:")
     a = []
     b = []
     operators = []
-    print("Nhập ràng buộc:")
+    st.write("Nhập ràng buộc:")
     for i in range(n):
         constraint = []
-        print(f"Nhập hệ số của các biến trong ràng buộc thứ {i+1}:")
+        st.write(f"Nhập hệ số của các biến trong ràng buộc thứ {i+1}:")
         for j in range(m):
-            coefficient = float(input(f"Nhập hệ số của x{j+1}: "))
+            coefficient = float(st.text_input(f"Nhập hệ số của x{j+1}: "))
             constraint.append(coefficient)
         a.append(constraint)
-        print(a)
-        operator = input("Nhập toán tử ràng buộc (>=, <=, =): ")
+        operator = st.text_input("Nhập toán tử ràng buộc (>=, <=, =): ")
         operators.append(operator)
-        print(operators)
-        value = float(input("Nhập hệ số sau toán tử ràng buộc: "))
+        value = float(st.text_input("Nhập hệ số sau toán tử ràng buộc: "))
         b.append(value)
-        print(b)
     return n, a, operators, b
 
 def InputProblemType():
-    problem_type = input("Bạn muốn tìm max hay min (max/min): ")
+    problem_type = st.text_input("Bạn muốn tìm max hay min (max/min): ")
     return problem_type
+
 def InputObjectiveFunctionConditions(m):
     conditions = []
     for i in range(m):
-        condition = input(f"Nhập điều kiện của x{i+1} (<= 0, >= 0, tùy ý): ")
+        condition = st.text_input(f"Nhập điều kiện của x{i+1} (<= 0, >= 0, tùy ý): ")
         conditions.append(condition)
     return conditions
 def PrintObjectiveFunction(c, problem_type):
