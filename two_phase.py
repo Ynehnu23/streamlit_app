@@ -50,7 +50,7 @@ def InputConstraints():
         for i in range(int(n)):
             constraint = []
             st.write(f"Nhập hệ số của các biến trong ràng buộc thứ {i+1}:")
-            for j in range(m): 
+            for j in range(int(m)): 
                 coefficient = float(st.text_input(f"Nhập hệ số của x{j+1}: "))
                 constraint.append(coefficient)
             a.append(constraint)
