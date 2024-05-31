@@ -556,6 +556,9 @@ def ProcessPivotElement(a, pivot_element):
            a[i][pivot_element.column] = 0.0            
     return a
 def print_phase1_problem(a, b, current_c, n, m):
+    if current_c is None:
+        st.error("Hệ số của biến mục tiêu không được để trống.")
+        return
     print("Bài toán đã chuyển đổi:")
     print("Hàm mục tiêu sau khi chuyển đổi:")
     print("z =", " + ".join([f"{current_c[i]}x{i+1}" for i in range(len(current_c))]), "+ x0") # Thêm biến x0 vào hàm mục tiêu
