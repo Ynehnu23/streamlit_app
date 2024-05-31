@@ -198,10 +198,8 @@ def main():
 
         st.header("Input Problem Type")
         problem_type = st.selectbox("Do you want to maximize or minimize?", ["max", "min"])
-        
+
         if st.button("Solve"):
-            TwoPhaseResetGlobalState()
-            
             st.write("Objective Function:")
             obj_func_output = capture_output(TwoPhasePrintObjectiveFunction, c, problem_type)
             st.text(obj_func_output)
@@ -211,7 +209,7 @@ def main():
             st.text(constraints_output)
 
             st.write("Standard Form:")
-            a, b, c, n, m, conditions = SimplexConvertToStandardForm(a, b, c, n, m, problem_type, operators, conditions)
+            a, b, c, n, m, conditions = TwoPhaseConvertToStandardForm(a, b, c, n, m, problem_type, operators, conditions)
             
             st.write("Converted Equations:")
             current_c = c.copy()
