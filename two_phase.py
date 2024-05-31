@@ -1,6 +1,6 @@
 import sympy as sp
 import numpy as np
-
+import streamlit as st
 # -*- coding: utf-8 -*-
 # Định nghĩa class Position
 from rich.console import Console
@@ -24,7 +24,7 @@ def ReadEquation():
     return a, b, c, n, m
 
 def InputObjectiveFunction():
-    m = int(input("Nhập số lượng biến của hàm mục tiêu: "))
+    m =st.number_input("Nhập số lượng biến của hàm mục tiêu: ")
     print("Nhập hệ số của các biến trong hàm mục tiêu:")
     c = []
     for i in range(m):
@@ -34,7 +34,7 @@ def InputObjectiveFunction():
 
 def InputConstraints():
     print("Nhập số lượng ràng buộc:")
-    n = int(input("Nhập số lượng ràng buộc:"))
+    n = st.number_input("Nhập số lượng ràng buộc:")
     a = []
     b = []
     operators = []
