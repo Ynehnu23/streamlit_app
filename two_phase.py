@@ -77,7 +77,7 @@ def InputObjectiveFunctionConditions(m):
     return conditions
 def PrintObjectiveFunction(c, problem_type):
     global GLOBAL_STATE
-    c = GLOBAL_STATE["c"]
+    GLOBAL_STATE = {"c": None}
 
     if m is None or c is None:
         st.error("Hệ số của biến mục tiêu hoặc số lượng biến không được để trống.")
