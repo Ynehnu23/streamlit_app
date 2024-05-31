@@ -68,9 +68,12 @@ def InputProblemType():
 
 def InputObjectiveFunctionConditions(m):
     conditions = []
-    for i in range(m):
-        condition = st.text_input(f"Nhập điều kiện của x{i+1} (<= 0, >= 0, tùy ý): ")
-        conditions.append(condition)
+    if m is not None and m > 0:
+        for i in range(int(m)):
+            condition = st.text_input(f"Nhập điều kiện của x{i+1} (<= 0, >= 0, tùy ý): ")
+            conditions.append(condition)
+    else:
+        st.error("Số lượng biến của hàm mục tiêu phải là một số nguyên dương.")
     return conditions
 def PrintObjectiveFunction(c, problem_type):
     print("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓")
