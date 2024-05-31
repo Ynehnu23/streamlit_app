@@ -49,9 +49,9 @@ def InputConstraints():
     if n is not None and n > 0:
         for i in range(int(n)):
             constraint = []
-            st.write(f"Nhập hệ số của các biến trong ràng buộc thứ {i+1}:", key=f"constraint_{i}")
+            st.write(f"Nhập hệ số của các biến trong ràng buộc thứ {i+1}:", key=f"constraint_{i+1}")
             for j in range(int(m)):
-                coefficient = float(st.text_input(f"Nhập hệ số của x{j+1}: ", key=f"input_x{j+1}_{i}"))
+                coefficient = float(st.text_input(f"Nhập hệ số của x{j+1} trong ràng buộc {i+1}: ", key=f"input_x{j+1}_{i}"))
                 constraint.append(coefficient)
             a.append(constraint)
             operator = st.text_input("Nhập toán tử ràng buộc (>=, <=, =): ")
