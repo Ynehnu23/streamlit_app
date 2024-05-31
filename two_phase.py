@@ -33,7 +33,7 @@ def InputObjectiveFunction():
     c = []
     if m is not None and m > 0:
         for i in range(int(m)):
-            coefficient = float(st.text_input(f"Nhập hệ số của x{i+1}: "))
+            coefficient = float(st.text_input(f"Nhập hệ số của x{i+1}: ", key=f"input_{i+1}"))
             c.append(coefficient)
     else:
         st.error("Số lượng biến phải là một số nguyên dương.")
@@ -51,7 +51,7 @@ def InputConstraints():
             constraint = []
             st.write(f"Nhập hệ số của các biến trong ràng buộc thứ {i+1}:")
             for j in range(int(m)): 
-                coefficient = float(st.text_input(f"Nhập hệ số của x{j+1}: "))
+                coefficient = float(st.text_input(f"Nhập hệ số của x{j}", key=f"input_{j}"))
                 constraint.append(coefficient)
             a.append(constraint)
             operator = st.text_input("Nhập toán tử ràng buộc (>=, <=, =): ")
