@@ -31,9 +31,12 @@ def InputObjectiveFunction():
     m = st.number_input("Nhập số lượng biến của hàm mục tiêu: ")
     st.write("Nhập hệ số của các biến trong hàm mục tiêu:")
     c = []
-    for i in range(m):
-        coefficient = float(st.text_input(f"Nhập hệ số của x{i+1}: "))
-        c.append(coefficient)
+    if m is not None and m > 0:
+        for i in range(int(m)):
+            coefficient = float(st.text_input(f"Nhập hệ số của x{i+1}: "))
+            c.append(coefficient)
+    else:
+        st.error("Số lượng biến phải là một số nguyên dương.")
     return m, c
 
 def InputConstraints():
