@@ -108,6 +108,11 @@ def PrintConstraints(a, operators, b, conditions):
     print("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
 
 def convert_to_standard_form(a, b, c, n, m, problem_type, operators, conditions):
+     # Ensure all inputs are properly defined and initialized
+    if not isinstance(n, int) or n <= 0:
+        raise ValueError("The number of constraints 'n' must be a positive integer.")
+    if not isinstance(m, int) or m <= 0:
+        raise ValueError("The number of variables 'm' must be a positive integer.")
     print("Bài toán có sau khi chuyển đổi:")
     new_c = []
     new_a = []
