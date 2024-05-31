@@ -638,7 +638,7 @@ print()
 # Input problem type (maximize or minimize)
 problem_type = InputProblemType()
 conditions= InputObjectiveFunctionConditions(m)
-PrintObjectiveFunction(c, problem_type,m)
+PrintObjectiveFunction(c, problem_type)
 PrintConstraints(a, operators, b,conditions)
 a, b, c, n, m,conditions  = convert_to_standard_form(a, b, c, n, m, problem_type, operators,conditions)
 current_c = None
