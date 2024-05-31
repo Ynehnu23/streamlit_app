@@ -1,3 +1,6 @@
+simplex
+dual
+tow_phase
 absl-py==2.0.0
 astunparse==1.6.3
 beautifulsoup4==4.12.2
