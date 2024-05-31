@@ -102,6 +102,9 @@ def PrintConstraints(a, operators, b, conditions):
     print("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
 
 def convert_to_standard_form(a, b, c, n, m, problem_type, operators, conditions):
+    if n is None or n <= 0:
+        st.error("Số lượng ràng buộc phải là một số nguyên dương.")
+        return None, None, None, None, None, None
     print("Bài toán có sau khi chuyển đổi:")
     new_c = []
     new_a = []
