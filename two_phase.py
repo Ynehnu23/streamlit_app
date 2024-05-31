@@ -107,31 +107,116 @@ def PrintConstraints(a, operators, b, conditions):
     print()
     print("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
 
-def convert_to_standard_form(a, b, c, n, m, problem_type, operators, conm)
-
-    equations = []
-    for i in range(len(a)):
-     equation = f"w{i+1} = {b[i]}"
-     for j in range(len(a[i])):
-        if a[i][j] != 0:
-            if j == 0 or j == 1:
-                if conditions[j] == "tùy ý":
-                    equation += f" {'-' if a[i][j] > 0 else '+'} {abs(a[i][j])}x{j+1} - {abs(a[i][j])}x{j+1}_t"
-                else:
-                    equation += f" {'-' if a[i][j] > 0 else '+'} {abs(a[i][j])}x{j+1}"
+def convert_to_standard_form(a, b, c, n, m, problem_type, operators, conditions):
+    print("Bài toán có sau khi chuyển đổi:")
+    new_c = []
+    new_a = []
+    new_b = []
+    new_conditions = []
+    print("Hàm mục tiêu sau khi chuyển đổi:")
+    print("z =", end=" ")
+    
+    for i in range(len(c)):
+      
+        if conditions[i] == "<= 0":
+            new_conditions.append(conditions[i])
+            new_c.append(-c[i])
+            if problem_type == "max":
+               new_c[i] = -new_c[i]
             else:
-                if conditions[j] == "tùy ý":
-                    equation += f" {'-' if a[i][j] > 0 else '+'} {abs(a[i][j])}x{j} - {abs(a[i][j])}x{j}_t"
+               new_c[i] = new_c[i]
+            print(f"-{c[i]}x{i+1}", end="")
+        elif conditions[i] == "tùy ý":
+            new_conditions.append(conditions[i])
+            new_conditions.append(conditions[i]) 
+            new_c.append(c[i])
+            new_c.append(-c[i])
+            if problem_type == "max":
+               new_c[i] = -new_c[i]
+            else:
+               new_c[i] = new_c[i]
+            print(f"{new_c[i]}x{i+1} - {new_c[i]}x{i+1}_t", end="")
+        elif conditions[i] == ">= 0":
+            new_conditions.append(conditions[i])
+            new_c.append(c[i])
+            if problem_type == "max":
+              new_c[i] = -new_c[i]
+            else:
+              new_c[i] = new_c[i]
+            print(f"{c[i]}x{i+1}", end="")
+        if i < len(c) - 1:
+            print(" +", end=" ")
+    print()
+    result_strings = []
+    print("Thỏa mãn các ràng buộc sau:")
+    for i in range(n):
+        new_constraint = ""
+        new_constraint_1 = ""
+        temp_constraint = []
+        for j in range(m):
+            if conditions[j] == "<= 0":
+                temp_constraint.append(-a[i][j])  # Đảo dấu của hệ số
+                if -a[i][j] > 0 and -a[i][j] != a[i][0]:
+                    new_constraint += f" + {-a[i][j]}x{j+1}"
                 else:
-                    equation += f" {'-' if a[i][j] > 0 else '+'} {abs(a[i][j])}x{j}"
-     equation += f" + 1*x0"  # Thêm biến x0 vào phương trình và ràng buộc
-     equations.append(equation)
+                    new_constraint += f" {-a[i][j]}x{j+1}"
+            elif conditions[j] == "tùy ý":
+                # Lưu trữ giá trị biến hiện tại để sử dụng sau này
+                current_variable = a[i][j]
+                # Thêm biến mới vào danh sách ràng buộc
+                temp_constraint.append(current_variable)
+                temp_constraint.append(-current_variable)
+                if current_variable > 0 and current_variable != a[i][0]:
+                    new_constraint += f" + {current_variable}x{j+1} - {current_variable}x{j+1}_t"
+                else:
+                    new_constraint += f" {current_variable}x{j+1} - {current_variable}x{j+1}_t"
+            else:
+                temp_constraint.append(a[i][j])  # Giữ nguyên hệ số
+                if a[i][j] > 0 and a[i][j] != a[i][0]:
+                    new_constraint += f" + {a[i][j]}x{j+1}"
+                else:
+                    new_constraint += f" -{a[i][j]}x{j+1}"
+        new_a.append(temp_constraint) 
+        # Append temp_constraint to new_a
+        if operators[i] == ">=":   
+            new_a[i] = [-coeff for coeff in new_a[i]]  # Đảo dấu của từng phần tử trong danh sách new_a
+            new_constraint += f" <= {-b[i]}"
+            new_b.append(-b[i])
+        elif operators[i] == "=":
+            new_a.append([-coeff for coeff in temp_constraint])  # Negate the constraint
+            for j in range(m):
+                if conditions[j] == "<= 0":
+                    new_constraint_1 += f" {-temp_constraint[j]}x{j+1}"
+                elif conditions[j] == "tùy ý":
+                    current_variable = -temp_constraint[j]
+                    new_constraint_1 += f" {current_variable}x{j+1} - {current_variable}x{j+1}_t"
+                else:
+                    new_constraint_1 += f" {-temp_constraint[j]}x{j+1}"
+            new_constraint_1 += f" <= {-b[i]}"
+            new_b.append(-b[i])
+            new_constraint = ""
+            for j in range(m):
+                if conditions[j] == "<= 0":
+                    new_constraint_1 += f" {temp_constraint[j]}x{j+1}"
+                elif conditions[j] == "tùy ý":
+                    current_variable = temp_constraint[j]
+                    new_constraint += f" {current_variable}x{j+1} - {current_variable}x{j+1}_t"
+                else:
+                    new_constraint += f" {temp_constraint[j]}x{j+1}"
+            new_constraint += f" <= {b[i]}"
+            new_b.append(b[i])
+        elif operators[i] == "<=":
+            new_constraint += f" <= {b[i]}"
+            new_a[i] = [coeff for coeff in new_a[i]] 
+            new_b.append(b[i])
+        result_strings.append(new_constraint_1.strip())
+        result_strings.append(new_constraint.strip())
+    for constraint in result_strings:
+        print(constraint)
 
-    # In ra các phương trình đã được chuyển đổi
-    for equation in equations:
-        print(equation)
-    print("---------------------------------------------")
-
+    # Xóa các dòng trong a có số lượng phần tử khác với new_m
+    new_a = [row for row in new_a if len(row) == len(new_c)]
+    return new_a, new_b, new_c, len(new_b), len(new_c), new_conditions
 def CreateTableau_x0(a, b, c, n, m):
     tableau = []
     c = [0.0] * m  + [0.0] * n +  [1.0]
