@@ -76,6 +76,12 @@ def InputObjectiveFunctionConditions(m):
         st.error("Số lượng biến của hàm mục tiêu phải là một số nguyên dương.")
     return conditions
 def PrintObjectiveFunction(c, problem_type):
+    global GLOBAL_STATE
+    c = GLOBAL_STATE["c"]
+
+    if m is None or c is None:
+        st.error("Hệ số của biến mục tiêu hoặc số lượng biến không được để trống.")
+        return
     print("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓")
     print(" Tìm giá trị", end=" ",)
     if problem_type == "max":
