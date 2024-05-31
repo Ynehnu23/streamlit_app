@@ -45,18 +45,22 @@ def InputConstraints():
     b = []
     operators = []
     st.write("Nhập ràng buộc:")
-    for i in range(n):
-        constraint = []
-        st.write(f"Nhập hệ số của các biến trong ràng buộc thứ {i+1}:")
-        for j in range(m):
-            coefficient = float(st.text_input(f"Nhập hệ số của x{j+1}: "))
-            constraint.append(coefficient)
-        a.append(constraint)
-        operator = st.text_input("Nhập toán tử ràng buộc (>=, <=, =): ")
-        operators.append(operator)
-        value = float(st.text_input("Nhập hệ số sau toán tử ràng buộc: "))
-        b.append(value)
+    if n is not None and n > 0:
+        for i in range(int(n)):
+            constraint = []
+            st.write(f"Nhập hệ số của các biến trong ràng buộc thứ {i+1}:")
+            for j in range(m):  # Assuming 'm' is defined globally
+                coefficient = float(st.text_input(f"Nhập hệ số của x{j+1}: "))
+                constraint.append(coefficient)
+            a.append(constraint)
+            operator = st.text_input("Nhập toán tử ràng buộc (>=, <=, =): ")
+            operators.append(operator)
+            value = float(st.text_input("Nhập hệ số sau toán tử ràng buộc: "))
+            b.append(value)
+    else:
+        st.error("Số lượng ràng buộc phải là một số nguyên dương.")
     return n, a, operators, b
+
 
 def InputProblemType():
     problem_type = st.text_input("Bạn muốn tìm max hay min (max/min): ")
