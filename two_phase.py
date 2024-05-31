@@ -149,7 +149,7 @@ def convert_to_standard_form(a, b, c, n, m, problem_type, operators, conditions)
             else:
               new_c[i] = new_c[i]
             print(f"{c[i]}x{i+1}", end="")
-          else:
+        else:
             raise ValueError(f"Toán tử '{operators[i]}' trong ràng buộc không hợp lệ.")
         if i < len(c) - 1:
             print(" +", end=" ")
