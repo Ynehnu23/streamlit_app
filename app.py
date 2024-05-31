@@ -272,5 +272,7 @@ def main():
             solution_output = capture_output(SolveEquation, a, b, c, n, m, conditions, problem_type)
             st.text("Solution:")
             st.text(solution_output)
+            with open( "app\style.css" ) as css:
+                st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
 if __name__ == "__main__":
     main()
