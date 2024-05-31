@@ -754,7 +754,11 @@ conditions= InputObjectiveFunctionConditions(m)
 PrintObjectiveFunction(c, problem_type)
 PrintConstraints(a, operators, b,conditions)
 a, b, c, n, m,conditions  = convert_to_standard_form(a, b, c, n, m, problem_type, operators,conditions)
-current_c  =  [0.0] * (1) +[0.0] * (n - 1) 
+current_c = None
+if n is not None and n > 0:
+    current_c = [0.0] * (1) + [0.0] * (n - 1)
+else:
+    st.error("Số lượng ràng buộc phải là một số nguyên dương.")
 print_phase1_problem(a, b, current_c, n, m)
  # Chuyển đổi sang dạng bài toán bổ trợ
 tableau, num_variables = convert_to_phase1_form_x0(a, b, c, n, m)
